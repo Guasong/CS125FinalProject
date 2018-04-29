@@ -12,13 +12,13 @@ import edu.illinois.cs.cs125.coolminesweeper.views.grid.Cell;
 public class GameEngine {
     private static GameEngine instance;
 
-    public static final int BOMB_NUMBER = 30;
-    public static final int WIDTH = 15;
-    public static final int HEIGHT = 20;
+    public static final int BOMB_NUMBER = 10;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
 
-    private Context context;
+    public static Context context;
 
-    private Cell[][] MinesweeperGrid = new Cell[WIDTH][HEIGHT];
+    private static Cell[][] MinesweeperGrid = new Cell[WIDTH][HEIGHT];
 
     public static GameEngine getInstance() {
         if( instance == null ){
@@ -29,15 +29,15 @@ public class GameEngine {
 
     private GameEngine(){ }
 
-    public void createGrid(Context context){
-        this.context = context;
+    public static void createGrid(Context context){
+        context = context;
 
         // create the grid and store it
         int[][] GeneratedGrid = Generator.generate(BOMB_NUMBER,WIDTH, HEIGHT);
         setGrid(context,GeneratedGrid);
     }
 
-    private void setGrid(final Context context, final int[][] grid ){
+    private static void setGrid(final Context context, final int[][] grid ){
         for( int x = 0 ; x < WIDTH ; x++ ){
             for( int y = 0 ; y < HEIGHT ; y++ ){
                 if( MinesweeperGrid[x][y] == null ){
@@ -71,13 +71,13 @@ public class GameEngine {
                 }
 
                 /**
-                for( int xt = -1 ; xt <= 1 ; xt++ ){
-                    for( int yt = -1 ; yt <= 1 ; yt++){
-                        if( xt != yt ){
-                            click(x + xt , y + yt);
-                        }
-                    }
-                }
+                 for( int xt = -1 ; xt <= 1 ; xt++ ){
+                 for( int yt = -1 ; yt <= 1 ; yt++){
+                 if( xt != yt ){
+                 click(x + xt , y + yt);
+                 }
+                 }
+                 }
                  */
             }
 
@@ -94,7 +94,7 @@ public class GameEngine {
         int notRevealed = WIDTH * HEIGHT;
         for ( int x = 0 ; x < WIDTH ; x++ ){
             for( int y = 0 ; y < HEIGHT ; y++ ){
-                if( getCellAt(x,y).isRevealed() || getCellAt(x,y).isFlagged() ){
+                if( getCellAt(x,y).isRevealed() && getCellAt(x,y).isFlagged() ){
                     notRevealed--;
                 }
 
