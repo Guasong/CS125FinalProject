@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  *
  */
-public class Generator {
+public class MapConstructor {
 
     public static int[][] generate( int bombnumber , final int width , final int height){
         // Random for generating numbers
@@ -48,14 +48,10 @@ public class Generator {
 
         int count = 0;
 
-        //if( isMineAt(grid,x - 1 ,y + 1,width,height)) count++; // top-left
         if( isMineAt(grid,x     ,y + 1,width,height)) count++; // top
-        //if( isMineAt(grid,x + 1 ,y + 1,width,height)) count++; // top-right
         if( isMineAt(grid,x - 1 ,y    ,width,height)) count++; // left
         if( isMineAt(grid,x + 1 ,y    ,width,height)) count++; // right
-        //if( isMineAt(grid,x - 1 ,y - 1,width,height)) count++; // bottom-left
         if( isMineAt(grid,x     ,y - 1,width,height)) count++; // bottom
-        //if( isMineAt(grid,x + 1 ,y - 1,width,height)) count++; // bottom-right
 
         return count;
     }

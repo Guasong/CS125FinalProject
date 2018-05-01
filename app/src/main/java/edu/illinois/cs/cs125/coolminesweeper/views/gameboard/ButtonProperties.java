@@ -1,15 +1,15 @@
-package edu.illinois.cs.cs125.coolminesweeper.views.grid;
+package edu.illinois.cs.cs125.coolminesweeper.views.gameboard;
 
 import android.content.Context;
 import android.view.View;
 
-import edu.illinois.cs.cs125.coolminesweeper.GameEngine;
+import edu.illinois.cs.cs125.coolminesweeper.Laucher;
 
 
 /**
  *
  */
-public abstract class BaseCell extends View {
+public abstract class ButtonProperties extends View {
 
     private int value;
     private boolean isBomb;
@@ -20,7 +20,7 @@ public abstract class BaseCell extends View {
     private int x , y;
     private int position;
 
-    public BaseCell(Context context ){
+    public ButtonProperties(Context context ){
         super(context);
     }
 
@@ -93,7 +93,7 @@ public abstract class BaseCell extends View {
         this.x = x;
         this.y = y;
 
-        this.position = y * GameEngine.WIDTH + x;
+        this.position = y * Laucher.WIDTH + x;
 
         invalidate();
     }

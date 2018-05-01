@@ -1,4 +1,4 @@
-package edu.illinois.cs.cs125.coolminesweeper.views.grid;
+package edu.illinois.cs.cs125.coolminesweeper.views.gameboard;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,20 +7,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-import edu.illinois.cs.cs125.coolminesweeper.GameEngine;
+import edu.illinois.cs.cs125.coolminesweeper.Laucher;
 
 
 /**
  *
  */
-public class Grid extends GridView {
+public class GameBoard extends GridView {
 
-    public Grid(Context context , AttributeSet attrs){
+    public GameBoard(Context context , AttributeSet attrs){
         super(context,attrs);
 
-        GameEngine.getInstance().createGrid(context);
+        Laucher.getInstance().createGrid(context);
 
-        setNumColumns(GameEngine.WIDTH);
+        setNumColumns(Laucher.WIDTH);
         setAdapter(new GridAdapter());
     }
 
@@ -34,7 +34,7 @@ public class Grid extends GridView {
 
         @Override
         public int getCount() {
-            return GameEngine.getInstance().WIDTH * GameEngine.getInstance().HEIGHT;
+            return Laucher.getInstance().WIDTH * Laucher.getInstance().HEIGHT;
         }
 
         @Override
@@ -49,7 +49,7 @@ public class Grid extends GridView {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return GameEngine.getInstance().getCellAt(position);
+            return Laucher.getInstance().getCellAt(position);
         }
     }
 }

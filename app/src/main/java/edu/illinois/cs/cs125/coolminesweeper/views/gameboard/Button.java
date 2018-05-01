@@ -1,4 +1,4 @@
-package edu.illinois.cs.cs125.coolminesweeper.views.grid;
+package edu.illinois.cs.cs125.coolminesweeper.views.gameboard;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,16 +7,16 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
-import edu.illinois.cs.cs125.coolminesweeper.GameEngine;
+import edu.illinois.cs.cs125.coolminesweeper.Laucher;
 import edu.illinois.cs.cs125.coolminesweeper.R;
 
 
 /**
  *
  */
-public class Cell extends BaseCell implements View.OnClickListener , View.OnLongClickListener{
+public class Button extends ButtonProperties implements View.OnClickListener , View.OnLongClickListener{
 
-    public Cell(Context context , int x , int y ){
+    public Button(Context context , int x , int y ){
         super(context);
 
         setPosition(x,y);
@@ -32,12 +32,12 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
 
     @Override
     public void onClick(View v) {
-        GameEngine.getInstance().click( getXPos(), getYPos() );
+        Laucher.getInstance().click( getXPos(), getYPos() );
     }
 
     @Override
     public boolean onLongClick(View v) {
-        GameEngine.getInstance().flag( getXPos() , getYPos() );
+        Laucher.getInstance().flag( getXPos() , getYPos() );
 
         return true;
     }
@@ -109,18 +109,6 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
             case 4:
                 drawable = ContextCompat.getDrawable(getContext(), R.drawable.number_4);
                 break;
-            //case 5:
-                //drawable = ContextCompat.getDrawable(getContext(), R.drawable.number_5);
-                //break;
-            //case 6:
-                //drawable = ContextCompat.getDrawable(getContext(), R.drawable.number_6);
-                //break;
-            //case 7:
-                //drawable = ContextCompat.getDrawable(getContext(), R.drawable.number_7);
-                //break;
-            //case 8:
-                //drawable = ContextCompat.getDrawable(getContext(), R.drawable.number_8);
-                //break;
         }
 
         drawable.setBounds(0,0,getWidth(),getHeight());

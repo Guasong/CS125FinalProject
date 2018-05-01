@@ -3,14 +3,14 @@ package edu.illinois.cs.cs125.coolminesweeper;
 import android.content.Context;
 import android.widget.Toast;
 
-import edu.illinois.cs.cs125.coolminesweeper.util.Generator;
-import edu.illinois.cs.cs125.coolminesweeper.views.grid.Cell;
+import edu.illinois.cs.cs125.coolminesweeper.util.MapConstructor;
+import edu.illinois.cs.cs125.coolminesweeper.views.gameboard.Button;
 
 /**
  *
  */
-public class GameEngine {
-    private static GameEngine instance;
+public class Laucher {
+    private static Laucher instance;
 
     public static final int BOMB_NUMBER = 10;
     public static final int WIDTH = 10;
@@ -18,22 +18,22 @@ public class GameEngine {
 
     public static Context context;
 
-    private static Cell[][] MinesweeperGrid = new Cell[WIDTH][HEIGHT];
+    private static Button[][] MinesweeperGrid = new Button[WIDTH][HEIGHT];
 
-    public static GameEngine getInstance() {
+    public static Laucher getInstance() {
         if( instance == null ){
-            instance = new GameEngine();
+            instance = new Laucher();
         }
         return instance;
     }
 
-    private GameEngine(){ }
+    private Laucher(){ }
 
     public static void createGrid(Context context){
         context = context;
 
         // create the grid and store it
-        int[][] GeneratedGrid = Generator.generate(BOMB_NUMBER,WIDTH, HEIGHT);
+        int[][] GeneratedGrid = MapConstructor.generate(BOMB_NUMBER,WIDTH, HEIGHT);
         setGrid(context,GeneratedGrid);
     }
 
@@ -41,7 +41,7 @@ public class GameEngine {
         for( int x = 0 ; x < WIDTH ; x++ ){
             for( int y = 0 ; y < HEIGHT ; y++ ){
                 if( MinesweeperGrid[x][y] == null ){
-                    MinesweeperGrid[x][y] = new Cell( context , x,y);
+                    MinesweeperGrid[x][y] = new Button( context , x,y);
                 }
                 MinesweeperGrid[x][y].setValue(grid[x][y]);
                 MinesweeperGrid[x][y].invalidate();
@@ -49,14 +49,14 @@ public class GameEngine {
         }
     }
 
-    public Cell getCellAt(int position) {
+    public Button getCellAt(int position) {
         int x = position % WIDTH;
         int y = position / WIDTH;
 
         return MinesweeperGrid[x][y];
     }
 
-    public Cell getCellAt( int x , int y ){
+    public Button getCellAt(int x , int y ){
         return MinesweeperGrid[x][y];
     }
 
